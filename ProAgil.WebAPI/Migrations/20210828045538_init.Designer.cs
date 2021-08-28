@@ -8,7 +8,7 @@ using ProAgil.WebAPI.Data;
 namespace ProAgil.WebAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210828025042_init")]
+    [Migration("20210828045538_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,6 +25,9 @@ namespace ProAgil.WebAPI.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("DataEvento")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ImagemUrl")
                         .HasColumnType("longtext");
 
                     b.Property<string>("Local")
@@ -50,20 +53,32 @@ namespace ProAgil.WebAPI.Migrations
                         new
                         {
                             EventoId = 1,
-                            DataEvento = "29/08/2021 23:50:42",
+                            DataEvento = "30/08/2021 01:55:38",
+                            ImagemUrl = "img1.jpg",
                             Local = "Belo Horizonte",
                             Lote = "1° Lote",
                             QtdPessoas = 255,
-                            Tema = "ANGULAR + ASPNET CORE 5"
+                            Tema = "ANGULAR"
                         },
                         new
                         {
                             EventoId = 2,
-                            DataEvento = "01/09/2021 23:50:42",
-                            Local = "Belo Horizonte",
+                            DataEvento = "02/09/2021 01:55:38",
+                            ImagemUrl = "img2.jpg",
+                            Local = "Rio de Janeiro",
                             Lote = "2° Lote",
-                            QtdPessoas = 255,
-                            Tema = "ANGULAR + ASPNET CORE 5"
+                            QtdPessoas = 333,
+                            Tema = "ASPNET CORE 5"
+                        },
+                        new
+                        {
+                            EventoId = 3,
+                            DataEvento = "29/08/2021 01:55:38",
+                            ImagemUrl = "img3.jpg",
+                            Local = "São Paulo",
+                            Lote = "Lote Unico",
+                            QtdPessoas = 543,
+                            Tema = "Python para dataScience"
                         });
                 });
 #pragma warning restore 612, 618

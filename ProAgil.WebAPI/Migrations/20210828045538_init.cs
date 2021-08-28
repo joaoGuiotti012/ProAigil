@@ -24,6 +24,8 @@ namespace ProAgil.WebAPI.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     QtdPessoas = table.Column<int>(type: "int", nullable: false),
                     Lote = table.Column<string>(type: "varchar(40)", maxLength: 40, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ImagemUrl = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -34,13 +36,18 @@ namespace ProAgil.WebAPI.Migrations
 
             migrationBuilder.InsertData(
                 table: "Eventos",
-                columns: new[] { "EventoId", "DataEvento", "Local", "Lote", "QtdPessoas", "Tema" },
-                values: new object[] { 1, "29/08/2021 23:50:42", "Belo Horizonte", "1° Lote", 255, "ANGULAR + ASPNET CORE 5" });
+                columns: new[] { "EventoId", "DataEvento", "ImagemUrl", "Local", "Lote", "QtdPessoas", "Tema" },
+                values: new object[] { 1, "30/08/2021 01:55:38", "img1.jpg", "Belo Horizonte", "1° Lote", 255, "ANGULAR" });
 
             migrationBuilder.InsertData(
                 table: "Eventos",
-                columns: new[] { "EventoId", "DataEvento", "Local", "Lote", "QtdPessoas", "Tema" },
-                values: new object[] { 2, "01/09/2021 23:50:42", "Belo Horizonte", "2° Lote", 255, "ANGULAR + ASPNET CORE 5" });
+                columns: new[] { "EventoId", "DataEvento", "ImagemUrl", "Local", "Lote", "QtdPessoas", "Tema" },
+                values: new object[] { 2, "02/09/2021 01:55:38", "img2.jpg", "Rio de Janeiro", "2° Lote", 333, "ASPNET CORE 5" });
+
+            migrationBuilder.InsertData(
+                table: "Eventos",
+                columns: new[] { "EventoId", "DataEvento", "ImagemUrl", "Local", "Lote", "QtdPessoas", "Tema" },
+                values: new object[] { 3, "29/08/2021 01:55:38", "img3.jpg", "São Paulo", "Lote Unico", 543, "Python para dataScience" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

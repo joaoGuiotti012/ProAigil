@@ -40,16 +40,28 @@ namespace ProAgil.WebAPI.Data
                         Local = "Belo Horizonte",
                         Lote = "1° Lote",
                         QtdPessoas = 255,
-                        Tema = "ANGULAR + ASPNET CORE 5"
+                        Tema = "ANGULAR",
+                        ImagemUrl = "img1.jpg"
                     },
                     new Evento
                     {
                         EventoId = 2,
                         DataEvento = DateTime.Now.AddDays(5).ToString(),
-                        Local = "Belo Horizonte",
+                        Local = "Rio de Janeiro",
                         Lote = "2° Lote",
-                        QtdPessoas = 255,
-                        Tema = "ANGULAR + ASPNET CORE 5"
+                        QtdPessoas = 333,
+                        Tema = "ASPNET CORE 5",
+                        ImagemUrl = "img2.jpg"
+                    },
+                    new Evento
+                    {
+                        EventoId = 3,
+                        DataEvento = DateTime.Now.AddDays(1).ToString(),
+                        Local = "São Paulo",
+                        Lote = "Lote Unico",
+                        QtdPessoas = 543,
+                        Tema = "Python para dataScience",
+                        ImagemUrl = "img3.jpg"
                     }
                 );
         }

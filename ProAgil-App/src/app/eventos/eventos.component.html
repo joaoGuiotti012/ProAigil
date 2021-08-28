@@ -1,9 +1,56 @@
-<p>eventos works!</p>
-
-<h2>Eventos</h2>
-<div *ngFor="let evento of eventos">
-    <hr>
-    Tema: {{ evento.tema }} <br>
-    Local: {{ evento.local }}
-    <hr>
+<div  class="form-inline mt-3">
+    <div class="form-group mb-2">
+        <input type="text" 
+        class="form-control mr-2" 
+        placeholder="Buscar..."
+        [(ngModel)]="filtroLista"
+        >
+    </div>
+    <!-- <button class="btn btn-outline-success">
+        buscar
+    </button> -->
 </div>
+<h3> Filtro: {{ filtroLista }} </h3>
+<table class="mt-2 table table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th class="text-center">
+                <a class="btn btn-sm btn-outline-secondary" (click)="alternarImagem()">
+                    <i class="fas {{ mostrarImagem ? 'fa-eye-slash' : 'fa-eye' }}"></i>
+                </a>
+            </th>
+            <th>#</th>
+            <th>Tema</th>
+            <th>Local</th>
+            <th>Data</th>
+            <th>Qtd Pessoas</th>
+            <th>Lote</th>
+            <th>Opções</th>
+        </tr>
+    </thead>
+    <tbody *ngIf="eventos && eventos.length">
+        <tr *ngFor="let ev of eventosFiltrados">
+            <td>
+                <img *ngIf="mostrarImagem" src="http://localhost:5000/img/{{ ev.imagemUrl }}"
+                [style.width.px]="imagemAltura"
+                [style.margin.px]="imagemMargem"
+                >    
+            </td>
+            <td> {{ ev.eventoId }} </td>
+            <td> {{ ev.tema }} </td>
+            <td> {{ ev.local }} </td>
+            <td> {{ ev.dataEvento }} </td>
+            <td> {{ ev.qtdPessoas }} </td>
+            <td> {{ ev.lote | uppercase }} </td>
+            <td>
+                <button class="btn btn-danger"></button>
+                <button class="btn btn-success"></button>
+            </td>
+        </tr>
+    </tbody>
+    <tfoot *ngIf="!eventos.length">
+        <td class="text-center" colspan="7">
+            <h5> Nenhum evento encontrado!! </h5>
+        </td>
+    </tfoot>
+</table>

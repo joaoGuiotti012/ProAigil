@@ -9,7 +9,22 @@ import { environment } from 'src/environments/environment';
 })
 export class EventosComponent implements OnInit {
 
-  eventos: any;
+  eventos: any = [];
+  imagemAltura = 50;
+  imagemMargem = 2;
+  mostrarImagem = false;
+
+  _filtroLista: string = '';
+
+  get filtroLista(): string {
+    return this._filtroLista;
+  }
+  set filtroLista(value: string) {
+    this._filtroLista = value;
+    this.eventosFiltrados = this.filtroLista ? this.filtrarEventos(value) : this.eventos;
+  }
+
+  eventosFiltrados: any = [];
 
   constructor(
     private http: HttpClient
@@ -19,6 +34,12 @@ export class EventosComponent implements OnInit {
     this.getEventos();
   }
 
+  filtrarEventos(filtrarPor: string): any[] {
+    filtrarPor = filtrarPor.toLocaleLowerCase();
+    return this.eventos.filter(
+      (evento: any) => evento.tema.toLocaleLowerCase().indexOf(filtrarPor) !== -1
+    );
+  }
 
   getEventos(): void {
     this.http.get(`${environment.API}/Evento`)
@@ -30,5 +51,9 @@ export class EventosComponent implements OnInit {
           console.log(err);
         }
       );
+  }
+
+  alternarImagem() {
+    this.mostrarImagem = !this.mostrarImagem;
   }
 }
