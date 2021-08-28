@@ -15,6 +15,7 @@ obj
 /bazel-out
 
 # dependencies
+node_modules
 /node_modules
 
 # profiling files
