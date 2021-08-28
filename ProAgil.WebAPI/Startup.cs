@@ -32,6 +32,8 @@ namespace ProAgil.WebAPI
 
             services.AddDbContext<DataContext>(x => x.UseMySql(mySqlconnection, ServerVersion.AutoDetect(mySqlconnection)));
             services.AddControllers();
+            services.AddCors();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ProAgil.WebAPI", Version = "v1" });
@@ -48,6 +50,8 @@ namespace ProAgil.WebAPI
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ProAgil.WebAPI v1"));
             }
 
+            app.UseCors( x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader() );
+            
             app.UseHttpsRedirection();
 
             app.UseRouting();
