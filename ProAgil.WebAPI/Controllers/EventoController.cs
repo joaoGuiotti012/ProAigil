@@ -1,32 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ProAgil.WebAPI.Data;
-using ProAgil.WebAPI.Model;
+using ProAgil.Domain;
+using ProAgil.Repository;
 
 namespace ProAgil.WebAPI.Controllers
 {
-    [ApiController]
     [Route("[controller]")]
+    [ApiController]
     public class EventoController : ControllerBase
     {
-        public DataContext _context { get; }
+        public IProAgilRepository _repo { get; }
 
-        public EventoController(DataContext context)
+        public EventoController(IProAgilRepository repo)
         {
-            _context = context;
+            _repo = repo;
         }
 
-        [HttpGet("/Evento")]
+        [HttpGet]
         public async Task<IActionResult> Get()
         {
             try
             {
-                var results = await _context.Eventos.ToListAsync();
+                var results = await _repo.GetAllEventoAsync(true);
                 return Ok(results);
             }
             catch (System.Exception)
@@ -36,12 +35,12 @@ namespace ProAgil.WebAPI.Controllers
         }
 
 
-        [HttpGet("/Evento/{id}")]
-        public async Task<ActionResult<Evento>> getEventByID(int id)
+        [HttpGet("{EventoId}")]
+        public async Task<ActionResult<Evento>> getEventByID(int EventoId)
         {
             try
             {
-                var results = await _context.Eventos.FirstOrDefaultAsync(x => x.EventoId == id);
+                var results = await _repo.GetAllEventoAsyncById(EventoId, true);
                 return Ok(results);
             }
             catch (System.Exception)
@@ -50,10 +49,79 @@ namespace ProAgil.WebAPI.Controllers
             }
         }
 
-        [HttpPost("/Evento")]
-        public IActionResult create() {
+        [HttpGet("getByTema/{Tema}")]
+        public async Task<ActionResult<Evento>> GetByTema(String tema)
+        {
+            try
+            {
+                var results = await _repo.GetAllEventoAsyncByTema(tema, true);
+                return Ok(results);
+            }
+            catch (System.Exception)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, "Banco de Dados falhou!!");
+            }
+        }
 
-            return Ok("dasasd");
+        [HttpPost]
+        public async Task<IActionResult> Post(Evento model) {
+            try
+            {
+                _repo.Add(model);
+                if( await _repo.SaveChangesAsync()) {
+                   return Created($"/Evento/{model.Id}", model); 
+                }
+            }
+            catch (System.Exception)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, "Banco falhou!!");
+            }
+
+            return BadRequest();
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Put(int EventoId, Evento model) {
+            try
+            {
+                var evento =  await _repo.GetAllEventoAsyncById(EventoId, false);
+                
+                if( evento == null ) return NotFound();
+
+                _repo.Update(model);
+                
+                if( await _repo.SaveChangesAsync()) {
+                   return Created($"/Evento/{model.Id}", model); 
+                }
+            }
+            catch (System.Exception)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, "Banco falhou!!");
+            }
+
+            return BadRequest();
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(int EventoId) {
+            try
+            {
+                var evento =  await _repo.GetAllEventoAsyncById(EventoId, false);
+                
+                if( evento == null ) return NotFound();
+
+                _repo.Delete(evento);
+
+                if( await _repo.SaveChangesAsync()) {
+                   return Ok();
+                }
+            }
+            catch (System.Exception)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, "Banco falhou!!");
+            }
+
+            return BadRequest();
         }
 
     }

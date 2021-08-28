@@ -12,7 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using ProAgil.WebAPI.Data;
+using ProAgil.Repository;
 
 namespace ProAgil.WebAPI
 {
@@ -30,7 +30,12 @@ namespace ProAgil.WebAPI
         {
             string mySqlconnection = Configuration.GetConnectionString("DefaultConnection");
 
-            services.AddDbContext<DataContext>(x => x.UseMySql(mySqlconnection, ServerVersion.AutoDetect(mySqlconnection)));
+            services.AddDbContext<ProAgilContext>(
+                x => x.UseMySql(mySqlconnection, ServerVersion.AutoDetect(mySqlconnection))
+            );
+
+            services.AddScoped<IProAgilRepository, ProAgilRepository>();
+            
             services.AddControllers();
             services.AddCors();
 
@@ -50,10 +55,10 @@ namespace ProAgil.WebAPI
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ProAgil.WebAPI v1"));
             }
 
-            app.UseCors( x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader() );
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseStaticFiles();
-            
+
             app.UseHttpsRedirection();
 
             app.UseRouting();

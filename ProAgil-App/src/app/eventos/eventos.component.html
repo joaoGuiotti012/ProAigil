@@ -11,13 +11,14 @@
     </button> -->
 </div>
 <h3> Filtro: {{ filtroLista }} </h3>
+{{ eventos | json }}
 <table class="mt-2 table table-striped">
     <thead class="table-dark">
         <tr>
             <th class="text-center">
-                <a class="btn btn-sm btn-outline-secondary" (click)="alternarImagem()">
+                <button class="btn btn-sm btn-outline-secondary" (click)="alternarImagem()">
                     <i class="fas {{ mostrarImagem ? 'fa-eye-slash' : 'fa-eye' }}"></i>
-                </a>
+                </button>
             </th>
             <th>#</th>
             <th>Tema</th>
@@ -36,12 +37,19 @@
                 [style.margin.px]="imagemMargem"
                 >    
             </td>
-            <td> {{ ev.eventoId }} </td>
+            <td> {{ ev.id }} </td>
             <td> {{ ev.tema }} </td>
             <td> {{ ev.local }} </td>
             <td> {{ ev.dataEvento }} </td>
             <td> {{ ev.qtdPessoas }} </td>
-            <td> {{ ev.lote | uppercase }} </td>
+            <td> 
+                <div *ngIf="!ev.lotes.length" >
+                    --
+                </div>
+                <div *ngIf="ev.lotes.length">
+                    {{ ev.lotes[0].nome | uppercase }}
+                </div>
+            </td>
             <td>
                 <button class="btn btn-danger"></button>
                 <button class="btn btn-success"></button>
