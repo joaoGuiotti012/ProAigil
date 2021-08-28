@@ -1,21 +1,17 @@
-<div  class="form-inline mt-3">
+<div class="form-inline mt-3">
     <div class="form-group mb-2">
-        <input type="text" 
-        class="form-control mr-2" 
-        placeholder="Buscar..."
-        [(ngModel)]="filtroLista"
-        >
+        <input type="text" class="form-control mr-2" placeholder="Buscar..." [(ngModel)]="filtroLista"
+            formControlName="">
     </div>
     <!-- <button class="btn btn-outline-success">
         buscar
     </button> -->
 </div>
 <h3> Filtro: {{ filtroLista }} </h3>
-{{ eventos | json }}
 <table class="mt-2 table table-striped">
     <thead class="table-dark">
         <tr>
-            <th class="text-center">
+            <th>
                 <button class="btn btn-sm btn-outline-secondary" (click)="alternarImagem()">
                     <i class="fas {{ mostrarImagem ? 'fa-eye-slash' : 'fa-eye' }}"></i>
                 </button>
@@ -32,18 +28,16 @@
     <tbody *ngIf="eventos && eventos.length">
         <tr *ngFor="let ev of eventosFiltrados">
             <td>
-                <img *ngIf="mostrarImagem" src="http://localhost:5000/img/{{ ev.imagemUrl }}"
-                [style.width.px]="imagemAltura"
-                [style.margin.px]="imagemMargem"
-                >    
+                <img *ngIf="mostrarImagem" class="box-shadow" src="http://localhost:5000/img/{{ ev.imagemUrl }}"
+                    [style.width.px]="imagemAltura" [style.margin.px]="imagemMargem">
             </td>
             <td> {{ ev.id }} </td>
             <td> {{ ev.tema }} </td>
             <td> {{ ev.local }} </td>
-            <td> {{ ev.dataEvento }} </td>
+            <td> {{ ev.dataEvento | date: 'dd/MM/yyyy' }} </td>
             <td> {{ ev.qtdPessoas }} </td>
-            <td> 
-                <div *ngIf="!ev.lotes.length" >
+            <td>
+                <div *ngIf="!ev.lotes.length">
                     --
                 </div>
                 <div *ngIf="ev.lotes.length">
@@ -51,8 +45,14 @@
                 </div>
             </td>
             <td>
-                <button class="btn btn-danger"></button>
-                <button class="btn btn-success"></button>
+                <div class="btn-group">
+                    <button class="btn btn-sm btn-danger" (click)="openModal()" tooltip="Editar">
+                        <i class="fa fa-edit"></i>
+                    </button>
+                    <button class="btn btn-sm btn-success" tooltip="Excluir">
+                        <i class="fa fa-eraser"></i>
+                    </button>
+                </div>
             </td>
         </tr>
     </tbody>
@@ -62,3 +62,86 @@
         </td>
     </tfoot>
 </table>
+
+<form class="needs-validation" [formGroup]="registerForm">
+    <div class="row g-3">
+        <div class="col-12">
+            <label for="firstName" class="form-label">Tema</label>
+            <input type="text" class="form-control" 
+                [class.is-invalid]="_f.tema.errors && _f.tema.touched" placeholder="" value="" formControlName="tema">
+            <div class="invalid-feedback">
+                Um Tema valido é requirido.
+            </div>
+        </div>
+
+        <div class="col-sm-8">
+            <label for="local" class="form-label">Local</label>
+            <input type="text" class="form-control" 
+                [class.is-invalid]="_f.local.errors && _f.local.touched" id="local" placeholder="" value=""
+                formControlName="local">
+            <div class="invalid-feedback">
+                Um local valido é requerido.
+            </div>
+        </div>
+
+        <div class="col-4">
+            <label for="username" class="form-label">Data e Hora</label>
+            <div class="input-group has-validation">
+                <span class="input-group-text">@</span>
+                <input type="text" class="form-control" 
+                    [class.is-invalid]="_f.dataEvento.errors && _f.dataEvento.touched" id="username" placeholder="Username"
+                    formControlName="dataEvento">
+                <div class="invalid-feedback">
+                    Uma Data e Hora valido é requerido.
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <label for="Qtd Pessoas" class="form-label">Qtd Pessoas <span class="text-muted">(Optional)</span></label>
+            <input type="Qtd Pessoas" class="form-control" 
+                [class.is-invalid]="_f.qtdPessoas.errors && _f.qtdPessoas.touched" id="qtdPessoas" formControlName="qtdPessoas">
+            <div class="invalid-feedback">
+                Um valor para Qtd Pessoas valido é requerido.
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <label for="Imagem" class="form-label">Imagem</label>
+            <input type="text" class="form-control" 
+                [class.is-invalid]="_f.imagemUrl.errors && _f.imagemUrl.touched" id="Imagem" placeholder="" formControlName="imagemUrl">
+            <div class="invalid-feedback">
+                Uma imagem valida é requerido.
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <label for="address2" class="form-label">Email <span class="text-muted">(Optional)</span></label>
+            <input type="text" class="form-control" 
+                [class.is-invalid]="_f.email.errors && _f.email.touched" id="address2" placeholder="" formControlName="email">
+            <div class="invalid-feedback">
+                Um Email valido é requerido
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label for="address2" class="form-label">Telefone <span class="text-muted">(Optional)</span></label>
+            <input type="text" class="form-control" 
+                [class.is-invalid]="_f.telefone.errors && _f.telefone.touched" id="address2" placeholder="" formControlName="telefone">
+            <div class="invalid-feedback">
+                Um telefone valido é requerido
+            </div>
+        </div>
+
+    </div>
+
+    <hr class="my-4">
+</form>
+<br>
+<button class="btn btn-secondary">
+    Fechar
+</button>
+<button class="btn btn-primary">
+    Salvar Alterações
+</button>
+<br>
+<br>

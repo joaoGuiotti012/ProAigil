@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { BsModalService } from 'ngx-bootstrap/modal';
 import { Evento } from '../models/Evento';
 import { EventoService } from '../services/evento.service';
+import { ModalEditarComponent } from './modal/editar/editar.component';
 
 @Component({
   selector: 'app-eventos',
@@ -12,7 +15,8 @@ export class EventosComponent implements OnInit {
   eventos: Evento[] = [];
   imagemAltura = 50;
   imagemMargem = 2;
-  mostrarImagem = false;
+  mostrarImagem = true;
+  registerForm: FormGroup = new FormGroup({});
 
   _filtroLista: string = '';
 
@@ -27,10 +31,13 @@ export class EventosComponent implements OnInit {
   eventosFiltrados: Evento[] = [];
 
   constructor(
-    private service: EventoService
+    private service: EventoService,
+    private modal: BsModalService,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
+    this.validation();
     this.carregdaDados();
   }
 
@@ -57,4 +64,35 @@ export class EventosComponent implements OnInit {
   alternarImagem() {
     this.mostrarImagem = !this.mostrarImagem;
   }
+
+  salvarAlteracoes(): void {
+
+  }
+
+  validation(): void {
+    this.registerForm = this.fb.group({
+      local: ['', Validators.required],
+      dataEvento: ['', Validators.required],
+      tema: ['', Validators.required],
+      qtdPessoas: ['', [Validators.required, Validators.max(120000)]],
+      imagemUrl: ['', Validators.required],
+      telefone: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+    })
+  }
+
+  openModal(): void {
+    this.modal.show(ModalEditarComponent, {})
+      .onHide?.subscribe(
+        (res) => {
+          alert('fechou' + JSON.stringify(res));
+        }
+      );
+  }
+
+  // Controls 
+  get _f() {
+    return this.registerForm.controls;
+  }
+
 }
