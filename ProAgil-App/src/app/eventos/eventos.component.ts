@@ -27,6 +27,7 @@ export class EventosComponent implements OnInit {
   get filtroLista(): string {
     return this._filtroLista;
   }
+  
   set filtroLista(value: string) {
     this._filtroLista = value;
     this.eventosFiltrados = this.filtroLista ? this.filtrarEventos(value) : this.eventos;
@@ -101,7 +102,6 @@ export class EventosComponent implements OnInit {
         }
       );
   }
-
 
   openModalNovo() {
     this.modal.show(ModalNovoComponent, { class: 'modal-lg', ignoreBackdropClick: true })
