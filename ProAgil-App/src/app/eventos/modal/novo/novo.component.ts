@@ -1,17 +1,15 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsDatepickerConfig, BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { BehaviorSubject } from 'rxjs';
-import { Evento } from 'src/app/models/Evento';
 
 @Component({
-  templateUrl: './editar.component.html',
-  styleUrls: ['./editar.component.scss']
+  templateUrl: './novo.component.html',
+  styleUrls: ['./novo.component.scss'],
 })
-export class ModalEditarComponent implements OnInit {
+export class ModalNovoComponent implements OnInit {
 
-  evento: Evento = Object.assign({});
   bsConfig?: Partial<BsDatepickerConfig> = { isAnimated: true, containerClass: 'theme-dark-blue' };
   registerForm: FormGroup = new FormGroup({});
 
@@ -34,19 +32,15 @@ export class ModalEditarComponent implements OnInit {
   }
 
   validation(): void {
-    try {
-      this.registerForm = this.fb.group({
-        local: [this.evento.local || '', Validators.required],
-        dataEvento: [this.evento.dataEvento || '', Validators.required],
-        tema: [this.evento.tema, [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
-        qtdPessoas: [this.evento.qtdPessoas || '', [Validators.required, Validators.max(120000)]],
-        imagemUrl: [this.evento.imagemUrl || '', Validators.required],
-        telefone: [this.evento.telefone || '', Validators.required],
-        email: [this.evento.email || '', [Validators.required, Validators.email]],
-      });
-    } catch (error) {
-
-    }
+    this.registerForm = this.fb.group({
+      local: ['', Validators.required],
+      dataEvento: ['', Validators.required],
+      tema: ['', Validators.required, Validators.minLength(4), Validators.maxLength(50)],
+      qtdPessoas: ['', [Validators.required, Validators.max(120000)]],
+      imagemUrl: ['', Validators.required],
+      telefone: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+    })
   }
 
   get _f() {
@@ -59,6 +53,5 @@ export class ModalEditarComponent implements OnInit {
     this._closeData.complete();
     this.bsModalRef.hide();
   }
-
 
 }
