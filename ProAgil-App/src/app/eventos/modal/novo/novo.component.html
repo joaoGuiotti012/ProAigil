@@ -6,7 +6,6 @@
 </div>
 <div class="modal-body">
   <div class="container">
-    {{ registerForm.valid }}
     <form class="needs-validation" [formGroup]="registerForm">
       <div class="row g-3">
         <div class="col-12">
@@ -82,7 +81,7 @@
   </div>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-primary" [disabled]="!registerForm.valid" (click)="onSubmit()">
+  <button class="btn btn-primary" [disabled]="registerForm.invalid" (click)="onSubmit()">
     Salvar Alterações
   </button>
 </div>
