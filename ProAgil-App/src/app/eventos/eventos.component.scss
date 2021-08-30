@@ -4,7 +4,6 @@ img.box-shadow {
     box-shadow: 0 10px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
 }
 
-
 button:disabled {
     cursor: not-allowed !important;
 }
@@ -15,4 +14,15 @@ button:disabled {
 
 .mr-auto {
     margin-right: auto;
+}
+
+.ml-auto {
+    margin-left: auto;
+}
+
+tfoot .detalhes-paginacao {
+    margin-top: 18px;
+    font-style: italic;
+    color: #b3b3b3;
+    position: absolute;
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { defineLocale, ptBrLocale } from 'ngx-bootstrap/chronos';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { ToastrService } from 'ngx-toastr';
 import { ToastService } from '../componentes/infra/toast/toast.service';
 import { Evento } from '../models/Evento';
 import { Lote } from '../models/Lote';
@@ -18,6 +19,9 @@ defineLocale('pt-br', ptBrLocale);
 })
 export class EventosComponent implements OnInit {
 
+  itensPorPagina = 5;
+  paginaAtual = 1;
+  totalRegistros = 0;
   eventos: Evento[] = [];
   imagemAltura = 50;
   imagemMargem = 2;
@@ -27,10 +31,10 @@ export class EventosComponent implements OnInit {
   get filtroLista(): string {
     return this._filtroLista;
   }
-  
+
   set filtroLista(value: string) {
     this._filtroLista = value;
-    this.eventosFiltrados = this.filtroLista ? this.filtrarEventos(value) : this.eventos;
+    this.filtroLista ? this.eventosFiltrados = this.filtrarEventos(value) : this.eventosFiltrados = this.aplicarPaginacao();
   }
 
   eventosFiltrados: Evento[] = [];
@@ -38,7 +42,8 @@ export class EventosComponent implements OnInit {
   constructor(
     private service: EventoService,
     private modal: BsModalService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private toast: ToastrService
   ) {
   }
 
@@ -53,6 +58,7 @@ export class EventosComponent implements OnInit {
   filtrarEventos(filtrarPor: string): any[] {
     let contains: Function = (value: string) => value.toLocaleLowerCase()
       .indexOf(filtrarPor.toLocaleLowerCase()) !== -1;
+    this.totalRegistros = this.eventos.length;
     return this.eventos.filter(
       (e: Evento) => contains(e.tema) || contains(e.local)
     );
@@ -62,11 +68,12 @@ export class EventosComponent implements OnInit {
     this.service.get()
       .subscribe(
         (_eventos: Evento[]) => {
+          this.totalRegistros = _eventos.length;
           this.eventos = _eventos;
-          this.eventosFiltrados = _eventos;
+          this.eventosFiltrados = this.aplicarPaginacao(_eventos);
         },
         err => {
-          console.log(err);
+          this.toast.error('Erro ao tentar carregar os eventos', 'ERRO');
         }
       );
   }
@@ -83,7 +90,7 @@ export class EventosComponent implements OnInit {
     const initialState = {
       evento: evento
     }
-    this.modal.show(ModalEditarComponent, { initialState })
+    this.modal.show(ModalEditarComponent, { class: 'modal-lg', ignoreBackdropClick: true, initialState })
       .content?.onClose.subscribe(
         (res: any) => {
           if (res) {
@@ -92,10 +99,10 @@ export class EventosComponent implements OnInit {
               .subscribe(
                 (res) => {
                   this.carregdaDados();
-                  this.toastService.show('Sucesso', `O evento ${evento.tema}, foi alterado!`)
+                  this.toast.success(`O evento ${evento.tema}, foi alterado!`, 'Sucesso')
                 },
                 err => {
-                  this.toastService.show('ERRO', JSON.stringify(err))
+                  this.toast.success('ERRO', JSON.stringify(err))
                 }
               )
           }
@@ -114,7 +121,8 @@ export class EventosComponent implements OnInit {
                 (novoEvento: Evento) => {
                   console.log(novoEvento);
                   this.carregdaDados();
-                  this.toastService.show('Sucesso', 'Novo Evento foi inserido na agenda!')
+                  this.toast.success('Novo Evento foi inserido na agenda!', 'Sucesso');
+                  // this.toast.success('Sucesso', 'Novo Evento foi inserido na agenda!')
                 },
                 err => {
                   console.error(err);
@@ -137,7 +145,7 @@ export class EventosComponent implements OnInit {
               .subscribe(
                 (novoEvento: Evento) => {
                   this.carregdaDados();
-                  this.toastService.show('Sucesso', 'Evento deletado com sucesso!')
+                  this.toast.success('Evento deletado com sucesso!', 'Sucesso')
                 },
                 err => {
                   console.error(err);
@@ -148,8 +156,28 @@ export class EventosComponent implements OnInit {
       );
   }
 
+  handlePagesChanges(pag: any): void {
+    this.paginaAtual = pag.page;
+    let paginasDe = (pag.page * pag.itemsPerPage) - pag.itemsPerPage;
+    let paginasAte = pag.page * pag.itemsPerPage;
+    this.eventosFiltrados = this.eventos.filter((x, i) => ((i + 1) > paginasDe && (i + 1) <= paginasAte));
+  }
+
+  handleNumPage($evento: any) {
+    alert(JSON.stringify($evento));
+  }
+
   showToast(template?: TemplateRef<any>) {
     this.toastService.show('TOAST', template || '', { delay: 1000, icon: 'fas fa-question-circle' });
+  }
+
+  aplicarPaginacao(_eventos?: Evento[]): Evento[] {
+    let paginaAte = (this.paginaAtual * this.itensPorPagina);
+    let paginaDe = paginaAte - this.itensPorPagina;
+    if (!_eventos)
+      _eventos = this.eventos;
+    this.totalRegistros = _eventos.length;
+    return _eventos.filter((x, i) => (i + 1) > paginaDe && (i + 1) <= paginaAte);
   }
 
 

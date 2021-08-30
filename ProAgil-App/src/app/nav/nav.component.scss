@@ -6,3 +6,24 @@
 .dropdown-actions  {
     margin-top: 12px;
 }
+
+.active-link {
+    color: #6610f2 !important;
+    font-weight: bold;
+    border-bottom: 2px #6610f2 solid;
+}
+
+.options {
+    cursor: pointer !important;
+    color: #6610f2 !important;
+    border-bottom: 1px #6610f2 dotted;
+}
+
+::ng-deep {
+    .dropdown-item:hover, .dropdown-item:focus {
+        background-color: #6610f2 !important;
+        color: #FFF !important;
+        font-weight: bold !important;
+        background-color: #e9ecef;
+    }
+}

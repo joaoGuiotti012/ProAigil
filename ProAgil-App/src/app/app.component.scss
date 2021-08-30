@@ -1,0 +1,45 @@
+::ng-deep {
+    ul.pagination {
+        justify-content: flex-end !important;
+    }
+
+    .page-link {
+        color: #212529 !important;
+        font-weight: bold;
+    }
+    .page-link :hover {
+        color: #212529 !important;
+        z-index: 2;
+        background-color: #e9ecef;
+        border-color: #dee2e6;
+    }
+    .page-item.active .page-link {
+        z-index: 3;
+        color: #fff !important;
+        background-color: #212529;
+        border-color: #212529;
+    }
+
+    .btn-outline-primary {
+        color: #6610f2 !important;
+        border-color: #6610f2 !important;
+
+        &:hover {
+            color: #fff !important;
+            background-color: #6610f2 !important;
+        }
+    }
+
+    .btn-primary {
+        background-color: #6610f2 !important;
+        border-color: #6610f2 !important;
+
+        &:hover {
+            background-color: #6f20f0 !important;
+        }
+    }
+
+    .text-primayr {
+        color: #6610f2 !important;
+    }
+}

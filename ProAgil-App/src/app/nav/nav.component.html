@@ -11,15 +11,15 @@
     </a>
 
     <nav class="d-flex mt-2 mt-md-0 ms-md-auto">
-      <a class="me-3 py-2 text-dark text-decoration-none" href="#">Eventos</a>
+      <a class="me-3 py-2 text-dark text-decoration-none" href="#" [routerLink]="'/evento'" [routerLinkActive]="'active-link'">Eventos</a>
       <a class="me-3 py-2 text-dark text-decoration-none" href="#">Palestrantes</a>
       <a class="me-3 py-2 text-dark text-decoration-none" href="#">Contatos</a>
       <a class="me-3 py-2 text-dark text-decoration-none" href="#">Sobre</a>
       <span class="space-only"></span>
       <div class="dropdown-actions btn-group" dropdown>
-        <a href="#" id="span-animated" dropdownToggle class="dropdown-toggle" aria-controls="dropdown-animated">
-          Guiotti
-        </a>
+        <p id="span-animated" dropdownToggle class="options dropdown-toggle" aria-controls="dropdown-animated">
+          <i class="fas fa-user-circle"></i> Guiotti
+        </p>
         <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="span-animated">
           <li role="menuitem"><a class="dropdown-item" href="#">Perfil</a></li>
           <li role="menuitem"><a class="dropdown-item" href="#">Sair</a>

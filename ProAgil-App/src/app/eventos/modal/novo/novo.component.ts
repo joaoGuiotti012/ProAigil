@@ -10,7 +10,11 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ModalNovoComponent implements OnInit {
 
-  bsConfig?: Partial<BsDatepickerConfig> = { isAnimated: true, containerClass: 'theme-dark-blue' };
+  bsConfig?: Partial<BsDatepickerConfig> = {
+    isAnimated: true,
+    containerClass: 'theme-dark-blue',
+    dateInputFormat: 'DD/MM/YYYY hh:mm'
+  };
   registerForm: FormGroup = new FormGroup({});
 
   private _closeData = new BehaviorSubject(null);
@@ -35,10 +39,10 @@ export class ModalNovoComponent implements OnInit {
     this.registerForm = this.fb.group({
       local: ['', Validators.required],
       dataEvento: ['', Validators.required],
-      tema: ['', Validators.required, Validators.minLength(4), Validators.maxLength(50)],
+      tema: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
       qtdPessoas: ['', [Validators.required, Validators.max(120000)]],
-      imagemUrl: ['', Validators.required],
-      telefone: ['', Validators.required],
+      imagemUrl: ['', [Validators.required]],
+      telefone: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
     })
   }

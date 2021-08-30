@@ -22,7 +22,7 @@
             <th>#</th>
             <th>Tema</th>
             <th>Local</th>
-            <th>Data</th>
+            <th>Data e Hora</th>
             <th>Qtd Pessoas</th>
             <th>Lote</th>
             <th>Opções</th>
@@ -37,7 +37,7 @@
             <td> {{ ev.id }} </td>
             <td> {{ ev.tema }} </td>
             <td> {{ ev.local }} </td>
-            <td> {{ ev.dataEvento | date: 'dd/MM/yyyy' }} </td>
+            <td> {{ ev.dataEvento }} </td>
             <td> {{ ev.qtdPessoas }} </td>
             <td>
                 <div *ngIf="!ev.lotes.length">
@@ -59,9 +59,21 @@
             </td>
         </tr>
     </tbody>
-    <tfoot *ngIf="!eventos.length">
-        <td class="text-center" colspan="7">
+    <tfoot>
+        <ng-container *ngIf="totalRegistros > 0">
+            <span class="detalhes-paginacao">
+                Mostrando {{ itensPorPagina }} de um total de {{ totalRegistros }} registros
+            </span>
+            <td colspan="8" *ngIf="totalRegistros > itensPorPagina">
+                <pagination (pageChanged)="handlePagesChanges($event)" [itemsPerPage]="itensPorPagina"
+                    [boundaryLinks]="true" [totalItems]="eventos?.length || 0" previousText="&lsaquo;"
+                    nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+                </pagination>
+            </td>
+        </ng-container>
+        <td *ngIf="!eventos?.length" class="text-center" colspan="8">
             <h5> Nenhum evento encontrado!! </h5>
         </td>
     </tfoot>
+
 </table>

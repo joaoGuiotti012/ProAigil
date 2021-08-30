@@ -12,7 +12,11 @@ import { Evento } from 'src/app/models/Evento';
 export class ModalEditarComponent implements OnInit {
 
   evento: Evento = Object.assign({});
-  bsConfig?: Partial<BsDatepickerConfig> = { isAnimated: true, containerClass: 'theme-dark-blue' };
+  bsConfig?: Partial<BsDatepickerConfig> = {
+    isAnimated: true,
+    containerClass: 'theme-dark-blue',
+    dateInputFormat: 'DD/MM/YYYY hh:mm'
+  };
   registerForm: FormGroup = new FormGroup({});
 
   private _closeData = new BehaviorSubject(null);
