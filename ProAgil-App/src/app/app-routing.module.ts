@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ContatosComponent } from './contatos/contatos.component';
-import { HomeComponent } from './home/home.component';
-import { PalestrantesComponent } from './palestrantes/palestrantes.component';
+import { ContatosComponent } from './componentes/contatos/contatos.component';
+import { HomeComponent } from './componentes/home/home.component';
+import { PalestrantesComponent } from './componentes/palestrantes/palestrantes.component';
 
 const routes: Routes = [
   {
@@ -11,7 +11,7 @@ const routes: Routes = [
   },
   {
     path: 'evento',
-    loadChildren: () => import('./eventos/eventos.module').then(m => m.EventosModule)
+    loadChildren: () => import('./componentes/eventos/eventos.module').then(m => m.EventosModule)
   },
   {
     path: 'palestrante',

@@ -27,7 +27,7 @@ export class EventoService {
     return this.http.get<Evento[]>(`${this.baseURL}/${id}`);
   }
 
-  create(evento: Evento): Observable<any> {
+  create(evento: Evento): Observable<any> { 
     return this.http.post(this.baseURL, evento);
   }
 
@@ -37,6 +37,13 @@ export class EventoService {
 
   delete(id: number | string): Observable<any> {
     return this.http.delete(`${this.baseURL}/${id}`);
+  }
+
+  upload(file: any, fileName: string): Observable<any> {
+    const fileToUpload = <File>file[0];
+    const formData = new FormData();
+    formData.append('file', fileToUpload, fileToUpload.name);
+    return this.http.post(`${this.baseURL}/upload/${fileName}`, formData);
   }
 
 }

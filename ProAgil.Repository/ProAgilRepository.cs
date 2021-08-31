@@ -1,3 +1,4 @@
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -35,7 +36,6 @@ namespace ProAgil.Repository
         {
             return (await _context.SaveChangesAsync() > 0);
         }
-
 
         //EVENTO
         public async Task<Evento[]> GetAllEventoAsync(bool includePalestrantes = false)
