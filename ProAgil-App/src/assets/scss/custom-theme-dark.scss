@@ -1,5 +1,7 @@
 
 $white:#FFF;
+$gray-100: #f8f9fa;
+$gray-200: #e9ecef;
 $gray-300:#6e6e6f;
 $gray-400:#444445;
 $gray-700:#2d2d2f;
@@ -70,10 +72,33 @@ $input-disabled-bg:#222;
 $input-color:$white;
 $input-focus-color:$gray-200;
 
+$btn-close-color: $white;
+$btn-link-color: $white;
+
+// Modals
+$modal-dialog-margin-y-sm-up: 30px;
+$modal-content-bg: $body-bg;
+$modal-content-color: $body-color;
+$modal-content-border-color: rgba($body-color, 0.2);
+$modal-content-box-shadow-xs: 0 3px 9px rgba($gray-600, 0.5);
+$modal-content-box-shadow-sm-up: 0 5px 15px rgba($gray-600, 0.5);
+$modal-backdrop-bg: $white;
+$modal-backdrop-opacity: 0.5;
+$modal-header-border-color: $gray-200;
+$modal-footer-border-color: $gray-200;
+$modal-header-padding: 15px;
+$modal-lg: 800px;
+$modal-md: 500px;
+$modal-sm: 300px;
+$modal-transition: transform 0.3s ease-out;
+
 $alert-bg-level:-2;
 $alert-border-level:-4;
 $alert-color-level:-8;
 
+.btn-close {
+    background: $body-color url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat !important;
+}
 @import "~bootstrap/scss/bootstrap";
 
 
