@@ -12,8 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { EventoResolve } from 'src/app/resolvers/evento.resolver';
 import { PopoverModule } from 'ngx-bootstrap/popover';
-import { ToastrModule } from 'ngx-toastr';
-import { environment } from 'src/environments/environment';
+import { DetalheComponent } from './detalhe/detalhe.component';
 
 const routes: Routes = [
   {
@@ -26,6 +25,10 @@ const routes: Routes = [
     resolve: {
       evento: EventoResolve
     }
+  },
+  {
+    path: ':id/detalhado',
+    component: DetalheComponent,
   },
 ]
 
@@ -44,6 +47,7 @@ const routes: Routes = [
   declarations: [
     EventosComponent,
     EventosComponent,
+    DetalheComponent,
     ModalEditarComponent,
     ModalNovoComponent,
     ModalExcluirComponent,

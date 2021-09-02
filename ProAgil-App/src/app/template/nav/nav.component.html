@@ -1,6 +1,8 @@
 <div class="d-flex flex-column flex-md-row align-items-center mr-2 p-2 border-bottom">
   <div class="container">
 
+
+
     <div class="d-flex">
       <a href="/" class="align-items-center text-dark text-decoration-none">
         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="32" class="me-2" viewBox="0 0 118 94" role="img">
@@ -34,7 +36,7 @@
       <span class="space-only"></span>
       <div class="dropdown-actions btn-group" dropdown>
         <p id="span-animated" dropdownToggle class="options dropdown-toggle" aria-controls="dropdown-animated">
-          <i class="fas fa-user-circle"></i> Guiotti
+          <i class="fas fa-user-circle"></i> {{ user.unique_name }}
         </p>
         <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="span-animated">
           <li role="menuitem"><a class="dropdown-item" href="#">Perfil</a></li>

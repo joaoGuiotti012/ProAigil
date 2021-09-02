@@ -2,9 +2,10 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
+import { environment } from 'src/environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { ToastrModule } from 'ngx-toastr';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 import { AppComponent } from './app.component';
@@ -17,12 +18,10 @@ import { HomeComponent } from './componentes/home/home.component';
 import { FooterComponent } from './template/footer/footer.component';
 import { SobreComponent } from './componentes/sobre/sobre.component';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
-import { environment } from 'src/environments/environment';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LoginComponent } from './componentes/user/login/login.component';
-import { RegisterComponent } from './componentes/user/register/register.component';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenApiService } from './interceptors/token-api.service';
+import { LoginComponent } from './componentes/auth/login/login.component';
+import { RegisterComponent } from './componentes/auth/register/register.component';
 
 @NgModule({
   declarations: [

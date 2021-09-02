@@ -3,9 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { ContatosComponent } from './componentes/contatos/contatos.component';
 import { HomeComponent } from './componentes/home/home.component';
 import { PalestrantesComponent } from './componentes/palestrantes/palestrantes.component';
-import { LoginComponent } from './componentes/user/login/login.component';
-import { RegisterComponent } from './componentes/user/register/register.component';
-import { UserComponent } from './componentes/user/user.component';
+import { LoginComponent } from './componentes/auth/login/login.component';
+import { RegisterComponent } from './componentes/auth/register/register.component';
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
@@ -13,11 +12,7 @@ const routes: Routes = [
     path: 'inicio',
     component: HomeComponent,
     canActivate: [AuthGuard]
-  },
-  {
-    path: 'user',
-    component: UserComponent
-  },
+  }, 
   {
     path: 'login',
     component: LoginComponent,

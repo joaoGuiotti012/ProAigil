@@ -13,26 +13,34 @@ const BASE_URL = `${environment.API}/user`;
 export class AuthService {
 
   private notLogged$ = new BehaviorSubject<Boolean>(false);
-
-  private jwtHelper = new JwtHelperService();
-  private decodeToken: any;
+  private userLoged$ = new BehaviorSubject<any>({});
+  private _jwtHelper = new JwtHelperService();
 
   get notLogged(): Observable<any> {
     return this.notLogged$.asObservable();
   }
 
+  get userLogged(): Observable<any> {
+    return this.userLoged$.asObservable();
+  }
+
   constructor(private http: HttpClient) {
+    this.setToken();
+  }
+
+  setToken(token?: string) {
+    token = token || localStorage.getItem('token') || '';
     this.notLogged$.next(this.isTokenExpired());
+    this.userLoged$.next(this._jwtHelper.decodeToken(token));
   }
 
   login(user: any): Observable<any> {
     return this.http
       .post(`${BASE_URL}/login`, user).pipe(
-        map(({ token, user }: any) => {
+        map(({ token }: any) => {
           if (token) {
             localStorage.setItem('token', token);
-            this.decodeToken = this.jwtHelper.decodeToken(token);
-            this.notLogged$.next(false);
+            this.setToken(token);
           }
         })
       );
@@ -51,7 +59,9 @@ export class AuthService {
 
   isTokenExpired(): Boolean {
     const token: string = localStorage.getItem('token') || '';
-    return this.jwtHelper.isTokenExpired(token);
+    return this._jwtHelper.isTokenExpired(token);
   }
+
+
 
 }

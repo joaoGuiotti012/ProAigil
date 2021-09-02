@@ -8,12 +8,16 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class NavComponent implements OnInit {
 
+
   @Output('trocarTema') trocarTema = new EventEmitter<boolean>();
 
-  constructor(private auth: AuthService) { }
+  user: any;
 
-  ngOnInit() {
+  constructor(private auth: AuthService) {
+    this.auth.userLogged.subscribe((u) => this.user = u);
   }
+
+  ngOnInit() { }
 
   logout() {
     this.auth.logout();
