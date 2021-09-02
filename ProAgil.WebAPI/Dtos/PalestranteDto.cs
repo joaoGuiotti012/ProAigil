@@ -5,17 +5,17 @@ namespace ProAgil.WebAPI.Dtos
 {
     public class PalestranteDto
     {
-        public int Id { get; set; }
+        public int id { get; set; }
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
-        public string Nome { get; set; }
+        public string nome { get; set; }
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
-        public string MiniCurriculo { get; set; }
-        public string ImagemUrl { get; set; }
+        public string miniCurriculo { get; set; }
+        public string imagemUrl { get; set; }
         [Phone(ErrorMessage = "O campo {0} não corresponde a um telefone válido")]
-        public string Telefone { get; set; }
+        public string telefone { get; set; }
         [EmailAddress(ErrorMessage = "O campo {0} não corresponde a um email válido")]
-        public string Email { get; set; }
-        public List<RedeSocialDto> RedesSociais { get; set; }
-        public List<EventoDto> Eventos { get; set; }
+        public string email { get; set; }
+        public List<RedeSocialDto> redesSociais { get; set; }
+        public List<EventoDto> eventos { get; set; }
     }
 }

@@ -12,6 +12,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { EventoResolve } from 'src/app/resolvers/evento.resolver';
 import { PopoverModule } from 'ngx-bootstrap/popover';
+import { ToastrModule } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
 
 const routes: Routes = [
   {
@@ -37,7 +39,7 @@ const routes: Routes = [
     TooltipModule.forRoot(),
     BsDatepickerModule.forRoot(),
     PaginationModule.forRoot(),
-    PopoverModule.forRoot()
+    PopoverModule.forRoot(),
   ],
   declarations: [
     EventosComponent,

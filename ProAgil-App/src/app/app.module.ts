@@ -17,12 +17,20 @@ import { HomeComponent } from './componentes/home/home.component';
 import { FooterComponent } from './template/footer/footer.component';
 import { SobreComponent } from './componentes/sobre/sobre.component';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { environment } from 'src/environments/environment';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './componentes/user/login/login.component';
+import { RegisterComponent } from './componentes/user/register/register.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenApiService } from './interceptors/token-api.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     FooterComponent,
+    LoginComponent,
+    RegisterComponent,
     HomeComponent,
     DashboardComponent,
     ContatosComponent,
@@ -33,13 +41,17 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
     BrowserAnimationsModule,
     InfraModule,
     BsDropdownModule.forRoot(),
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot(environment.TOAST_CONFIG),
     CarouselModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: TokenApiService, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

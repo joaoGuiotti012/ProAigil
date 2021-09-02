@@ -9,7 +9,7 @@ import { Evento } from '../models/Evento';
 })
 export class EventoService {
 
-  baseURL = `${environment.API}/Evento`
+  baseURL = `${environment.API}/evento`
 
   constructor(
     private http: HttpClient

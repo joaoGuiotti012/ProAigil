@@ -1,9 +1,8 @@
-
 .space-only {
     width: 100%;
 }
 
-.dropdown-actions  {
+.dropdown-actions {
     margin-top: 12px;
 }
 
@@ -13,17 +12,17 @@
     border-bottom: 2px #6610f2 solid;
 }
 
-.options {
-    cursor: pointer !important;
-    color: #6610f2 !important;
-    border-bottom: 1px #6610f2 dotted;
+.ml-auto {
+    margin-left: auto;
 }
 
-::ng-deep {
-    .dropdown-item:hover, .dropdown-item:focus {
-        background-color: #6610f2 !important;
-        color: #FFF !important;
-        font-weight: bold !important;
-        background-color: #e9ecef;
+.theme-dark {
+    a {
+        color: #fff !important;
+    }
+}
+.theme-ligth {
+    a {
+        color: #000 !important;
     }
 }

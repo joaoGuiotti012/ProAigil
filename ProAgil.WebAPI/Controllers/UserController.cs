@@ -17,7 +17,7 @@ using System.IdentityModel.Tokens.Jwt;
 
 namespace ProAgil.WebAPI.Controllers
 {
-    [Route("/[controller]")]
+    [Route("/user")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -36,13 +36,13 @@ namespace ProAgil.WebAPI.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet("GetUser")]        
+        [HttpGet]        
         public async Task<IActionResult> Get()
         {
             return Ok(new UserDto());
         }
 
-        [HttpPost("Register")]
+        [HttpPost("register")]
         [AllowAnonymous]
         public async Task<IActionResult> Register(UserDto UserDto)
         {
@@ -50,7 +50,7 @@ namespace ProAgil.WebAPI.Controllers
             {
                 var user = _mapper.Map<User>(UserDto);
 
-                var result = await _userManager.CreateAsync(user, UserDto.Password);
+                var result = await _userManager.CreateAsync(user, UserDto.password);
 
                 var userToReturn = _mapper.Map<UserDto>(user);
 
@@ -67,21 +67,21 @@ namespace ProAgil.WebAPI.Controllers
             }
         }
 
-        [HttpPost("Login")]
+        [HttpPost("login")]
         [AllowAnonymous]
         public async Task<IActionResult> Login(UserLoginDto userLogin)
         {
 
             try
             {
-                var user = await _userManager.FindByNameAsync(userLogin.UserName);
+                var user = await _userManager.FindByNameAsync(userLogin.userName);
 
-                var result = await _signInManager.CheckPasswordSignInAsync(user, userLogin.Password, false);
+                var result = await _signInManager.CheckPasswordSignInAsync(user, userLogin.password, false);
 
                 if (result.Succeeded)
                 {
                     var appUser = await _userManager.Users
-                        .FirstOrDefaultAsync(u => u.NormalizedUserName == userLogin.UserName.ToUpper());
+                        .FirstOrDefaultAsync(u => u.NormalizedUserName == userLogin.userName.ToUpper());
 
                     var userToReturn = _mapper.Map<UserLoginDto>(appUser);
 

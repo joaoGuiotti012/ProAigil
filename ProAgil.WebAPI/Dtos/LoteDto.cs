@@ -4,17 +4,17 @@ namespace ProAgil.WebAPI.Dtos
 {
     public class LoteDto
     {
-        public int Id { get; set; }
+        public int id { get; set; }
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
         public string nome { get; set; }
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
-        public decimal Preco { get; set; }
+        public decimal preco { get; set; }
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
-        public string DataInicio { get; set; }
+        public string dataInicio { get; set; }
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
-        public string DataFim { get; set; }
+        public string dataFim { get; set; }
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
         public int quantidade { get; set; }
-        public EventoDto Evento { get; }
+        public EventoDto evento { get; }
     }
 }

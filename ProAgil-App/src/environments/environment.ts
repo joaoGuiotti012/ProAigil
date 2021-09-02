@@ -4,7 +4,14 @@
 
 export const environment = {
   API: 'http://localhost:5000',
-  production: false
+  production: false,
+  TOAST_CONFIG: {
+    positionClass: 'toast-top-right',
+    preventDuplicates: true,
+    enableHtml: true,
+    progressBar: true,
+    timeOut: 4000
+  }
 };
 
 /*

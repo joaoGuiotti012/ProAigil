@@ -43,14 +43,14 @@ namespace ProAgil.Repository
 
 
             modelBuilder.Entity<PalestranteEvento>()
-                .HasKey(PE => new { PE.EventoId, PE.PalestranteId });
+                .HasKey(PE => new { PE.eventoId, PE.palestranteId });
 
             modelBuilder.Entity<Evento>()
-                .Property(e => e.Tema)
+                .Property(e => e.tema)
                     .HasMaxLength(80);
 
             modelBuilder.Entity<Evento>()
-                .Property(e => e.Local)
+                .Property(e => e.local)
                     .HasMaxLength(80);
 
             // modelBuilder.Entity<Evento>()

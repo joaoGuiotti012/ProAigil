@@ -1,5 +1,6 @@
 <infra-toasts></infra-toasts>
-<app-nav></app-nav>
+<app-nav (trocarTema)="trocarTema($event)" [hidden]="notLogged | async"></app-nav>
+
 <div class="container-default">
   <router-outlet></router-outlet>
 </div>

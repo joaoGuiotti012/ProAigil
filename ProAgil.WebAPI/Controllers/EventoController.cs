@@ -11,7 +11,7 @@ using ProAgil.WebAPI.Dtos;
 
 namespace ProAgil.WebAPI.Controllers
 {
-    [Route("[controller]")]
+    [Route("/evento")]
     [ApiController]
     public class EventoController : ControllerBase
     {
@@ -105,7 +105,7 @@ namespace ProAgil.WebAPI.Controllers
                 _repo.Add(_mapper.Map<Evento>(model));
                 if (await _repo.SaveChangesAsync())
                 {
-                    return Created($"/Evento/{model.Id}", _mapper.Map<EventoDto>(model));
+                    return Created($"/Evento/{model.id}", _mapper.Map<EventoDto>(model));
                 }
             }
             catch (System.Exception)
@@ -131,7 +131,7 @@ namespace ProAgil.WebAPI.Controllers
 
                 if (await _repo.SaveChangesAsync())
                 {
-                    return Created($"/Evento/{model.Id}", _mapper.Map<EventoDto>(model));
+                    return Created($"/Evento/{model.id}", _mapper.Map<EventoDto>(model));
                 }
             }
             catch (System.Exception)

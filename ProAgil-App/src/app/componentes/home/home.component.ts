@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   constructor() {
     for (let i = 1; i < 4; i++) {
       this.slides.push({
-        image: `${environment.API}/Resources/Img/img${i}.jpg`
+        image: `${environment.API}/wwwroot/img/img1.png`
       })
     }
    }

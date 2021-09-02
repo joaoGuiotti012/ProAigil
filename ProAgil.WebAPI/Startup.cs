@@ -80,7 +80,7 @@ namespace ProAgil.WebAPI
             })
             .AddJsonOptions(op => op.JsonSerializerOptions.PropertyNamingPolicy = null)
             .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-           
+
 
             services.AddScoped<IProAgilRepository, ProAgilRepository>();
 
@@ -112,6 +112,12 @@ namespace ProAgil.WebAPI
             {
                 FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"Resources")),
                 RequestPath = new PathString("/Resources")
+            });
+
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot")),
+                RequestPath = new PathString("/wwwroot")
             });
 
             app.UseHttpsRedirection();

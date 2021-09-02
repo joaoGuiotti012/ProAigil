@@ -30,6 +30,13 @@
             "name": ".NET Core Attach",
             "type": "coreclr",
             "request": "attach"
+        },
+        {
+            "type": "pwa-chrome",
+            "request": "launch",
+            "name": "Angular ProAgil",
+            "url": "http://localhost:4200",
+            "webRoot": "${workspaceFolder}/ProAgil-App"
         }
     ]
 }

@@ -176,7 +176,7 @@ export class EventosComponent implements OnInit {
   }
 
   handleNumPage($evento: any) {
-    alert(JSON.stringify($evento));
+    // alert(JSON.stringify($evento));
   }
 
   showToast(template?: TemplateRef<any>) {

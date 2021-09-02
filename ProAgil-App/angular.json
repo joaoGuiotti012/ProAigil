@@ -31,13 +31,12 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
               "node_modules/ngx-toastr/toastr.css",
-              {
-                "input": "./node_modules/bootstrap/dist/css/bootstrap.css"
-              }
+              "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
           },
           "configurations": {
             "production": {

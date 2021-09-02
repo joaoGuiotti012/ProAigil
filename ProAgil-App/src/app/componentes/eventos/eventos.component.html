@@ -41,10 +41,10 @@
                 <td> {{ ev.dataEvento }} </td>
                 <td> {{ ev.qtdPessoas }} </td>
                 <td>
-                    <div *ngIf="!ev.lotes.length">
+                    <div *ngIf="!ev.lotes?.length">
                         --
                     </div>
-                    <div *ngIf="ev.lotes.length">
+                    <div *ngIf="ev.lotes?.length">
                         {{ ev.lotes[0].nome | uppercase }}
                     </div>
                 </td>
