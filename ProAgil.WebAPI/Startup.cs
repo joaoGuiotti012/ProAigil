@@ -78,7 +78,7 @@ namespace ProAgil.WebAPI
                 op.Filters.Add(new AuthorizeFilter(policy));
 
             })
-            .AddJsonOptions(op => op.JsonSerializerOptions.PropertyNamingPolicy = null)
+            .AddJsonOptions(op => op.JsonSerializerOptions.PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase )
             .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
 

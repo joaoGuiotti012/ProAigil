@@ -4,10 +4,11 @@ namespace ProAgil.WebAPI.Dtos
 {
     public class RedeSocialDto
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
-        public string nome { get; set; }
+        public string Nome { get; set; }
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
-        public string uRL { get; set; }
+        public string Url { get; set; }
+
     }
 }

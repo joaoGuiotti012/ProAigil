@@ -4,14 +4,14 @@ namespace ProAgil.Domain
 {
     public class Palestrante
     {
-        public int id { get; set; }
-        public string nome { get; set; }
-        public string  miniCurriculo { get; set; }
-        public string imagemUrl { get; set; }
-        public string telefone { get; set; }
-        public string email { get; set; }
-        public List<RedeSocial> redesSociais { get; set; }
-        public List<PalestranteEvento> palestranteEventos { get; set; }
+        public int Id { get; set; }
+        public string Nome { get; set; }
+        public string  MiniCurriculo { get; set; }
+        public string ImagemUrl { get; set; }
+        public string Telefone { get; set; }
+        public string Email { get; set; }
+        public List<RedeSocial> RedesSociais { get; set; }
+        public List<PalestranteEvento> PalestrantesEventos { get; set; }
 
     }
 }

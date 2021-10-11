@@ -242,12 +242,12 @@ namespace ProAgil.Repository.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    nome = table.Column<string>(type: "longtext", nullable: true)
+                    Nome = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Preco = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     DataInicio = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     DataFim = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    quantidade = table.Column<int>(type: "int", nullable: false),
+                    Quantidade = table.Column<int>(type: "int", nullable: false),
                     EventoId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -295,7 +295,7 @@ namespace ProAgil.Repository.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Nome = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    URL = table.Column<string>(type: "longtext", nullable: true)
+                    Url = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     EventoId = table.Column<int>(type: "int", nullable: true),
                     PalestranteId = table.Column<int>(type: "int", nullable: true)

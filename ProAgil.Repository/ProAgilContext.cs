@@ -21,7 +21,6 @@ namespace ProAgil.Repository
         public DbSet<Lote> Lotes { get; set; }
         public DbSet<RedeSocial> RedeSociais { get; set; }
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -39,18 +38,17 @@ namespace ProAgil.Repository
                     .WithMany(r => r.UserRoles)
                     .HasForeignKey(ur => ur.UserId)
                     .IsRequired();
-            });
-
+            });     
 
             modelBuilder.Entity<PalestranteEvento>()
-                .HasKey(PE => new { PE.eventoId, PE.palestranteId });
+                .HasKey(PE => new { PE.EventoId, PE.PalestranteId }); 
 
             modelBuilder.Entity<Evento>()
-                .Property(e => e.tema)
+                .Property(e => e.Tema)
                     .HasMaxLength(80);
 
             modelBuilder.Entity<Evento>()
-                .Property(e => e.local)
+                .Property(e => e.Local)
                     .HasMaxLength(80);
 
             // modelBuilder.Entity<Evento>()

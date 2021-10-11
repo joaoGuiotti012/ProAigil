@@ -2,8 +2,9 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
-import { environment } from 'src/environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { environment } from 'src/environments/environment';
 import { ToastrModule } from 'ngx-toastr';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -47,6 +48,8 @@ import { RegisterComponent } from './componentes/auth/register/register.componen
     BsDropdownModule.forRoot(),
     ToastrModule.forRoot(environment.TOAST_CONFIG),
     CarouselModule.forRoot()
+  ],
+  exports: [
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenApiService, multi: true },

@@ -5,25 +5,25 @@ namespace ProAgil.WebAPI.Dtos
 {
     public class EventoDto
     {
-        public int id { get; set; }
+        public int Id { get; set; }
 
         [Required( ErrorMessage = "O campo {0} é obrigatório")]
         [StringLength(100, MinimumLength = 3, ErrorMessage = "Local é entre 3 e 100 caracteres")]
-        public string local { get; set; }
-        public string dataEvento { get; set; }
+        public string Local { get; set; }
+        public string DataEvento { get; set; }
         [Required( ErrorMessage = "O campo {0} é obrigatório")]
-        public string tema { get; set; }
+        public string Tema { get; set; }
 
         [Range(2,120000, ErrorMessage = "Quantidade de pessoas permitidade entre 2 e 120000")]
-        public int qtdPessoas { get; set; }
-        public string imagemUrl { get; set; }
+        public int QtdPessoas { get; set; }
+        public string ImagemUrl { get; set; }
         [Phone(ErrorMessage = "Telefone deve ser no formato correspondente")]
-        public string telefone { get; set; }
+        public string Telefone { get; set; }
         // DataAnotations para Email
         [EmailAddress( ErrorMessage = "O campo {0} não corresponde a um email válido")]
-        public string email { get; set; }
-        public List<LoteDto> lotes { get; set; }
-        public List<RedeSocialDto> redesSociais { get; set; }
-        public List<PalestranteDto> palestrantes { get; set; }
+        public string Email { get; set; }
+        public List<LoteDto> Lotes { get; set; }
+        public List<RedeSocialDto> RedesSociais { get; set; }
+        public List<PalestranteDto> Palestrantes { get; set; }
     }
 }

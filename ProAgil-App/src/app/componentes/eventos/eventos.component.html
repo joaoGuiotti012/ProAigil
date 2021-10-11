@@ -30,7 +30,7 @@
             </tr>
         </thead>
         <tbody *ngIf="eventos && eventos.length">
-            <tr *ngFor="let ev of eventosFiltrados">
+            <tr *ngFor="let ev of eventosFiltrados; trackBy: trackById">
                 <td>
                     <img *ngIf="mostrarImagem" class="box-shadow"
                         src="http://localhost:5000/Resources/Img/{{ ev.imagemUrl }}" [style.width.px]="imagemAltura"
@@ -57,7 +57,7 @@
                         <button class="btn btn-sm btn-success" (click)="openModalExcluir(ev)" tooltip="Excluir">
                             <i class="fa fa-eraser"></i>
                         </button>
-                        <button class="btn btn-sm btn-warning" [routerLink]="'/evento/' + ev.id + '/detalhado'"
+                        <button class="btn btn-sm btn-warning" [routerLink]="['/evento',  ev.id , 'detalhado']"
                             tooltip="Edição Detalhada">
                             <i class="fa fa-pencil-alt"></i>
                         </button>

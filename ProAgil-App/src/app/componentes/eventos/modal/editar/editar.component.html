@@ -53,8 +53,9 @@
 
         <div class="col-md-9">
           <label for="Imagem" class="form-label">Imagem</label>
-          <input type="file" #file class="form-control" [popover]="popPreviewImg" triggers="mouseenter:mouseleave" (change)="onFileChange($event)"
-            [class.is-invalid]="_f.imagemUrl.errors && _f.imagemUrl.touched" placeholder="" formControlName="imagemUrl">
+          <input type="file" #file class="form-control" [popover]="popPreviewImg" triggers="mouseenter:mouseleave"
+            (change)="onFileChange($event)" [class.is-invalid]="_f.imagemUrl.errors && _f.imagemUrl.touched"
+            placeholder="" formControlName="imagemUrl">
           <div class="invalid-feedback">
             Uma imagem valida é requerido.
           </div>
@@ -70,8 +71,8 @@
         </div>
         <div class="col-md-4">
           <label for="address2" class="form-label">Telefone </label>
-          <input type="text" class="form-control" [class.is-invalid]="_f.telefone.errors && _f.telefone.touched"
-            placeholder="" formControlName="telefone">
+          <input type="text" class="form-control" [mask]="'(00) 00000-0000'"
+            [class.is-invalid]="_f.telefone.errors && _f.telefone.touched" placeholder="" formControlName="telefone">
           <div class="invalid-feedback">
             Um telefone valido é requerido
           </div>

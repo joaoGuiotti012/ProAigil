@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "dev": "ng serve --open"
   },
   "private": true,
   "dependencies": {
@@ -22,6 +23,8 @@
     "@fortawesome/fontawesome-free": "^5.15.4",
     "bootstrap": "^5.1.0",
     "ngx-bootstrap": "^7.0.0",
+    "ngx-currency": "^2.5.3",
+    "ngx-mask": "^12.0.0",
     "ngx-toastr": "^14.1.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",

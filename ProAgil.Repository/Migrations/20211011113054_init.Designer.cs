@@ -9,7 +9,7 @@ using ProAgil.Repository;
 namespace ProAgil.Repository.Migrations
 {
     [DbContext(typeof(ProAgilContext))]
-    [Migration("20210831052529_init")]
+    [Migration("20211011113054_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -262,13 +262,13 @@ namespace ProAgil.Repository.Migrations
                     b.Property<int>("EventoId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Nome")
+                        .HasColumnType("longtext");
+
                     b.Property<decimal>("Preco")
                         .HasColumnType("decimal(65,30)");
 
-                    b.Property<string>("nome")
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("quantidade")
+                    b.Property<int>("Quantidade")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -334,7 +334,7 @@ namespace ProAgil.Repository.Migrations
                     b.Property<int?>("PalestranteId")
                         .HasColumnType("int");
 
-                    b.Property<string>("URL")
+                    b.Property<string>("Url")
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
@@ -413,13 +413,13 @@ namespace ProAgil.Repository.Migrations
             modelBuilder.Entity("ProAgil.Domain.PalestranteEvento", b =>
                 {
                     b.HasOne("ProAgil.Domain.Evento", "Evento")
-                        .WithMany("PalestranteEventos")
+                        .WithMany("PalestrantesEventos")
                         .HasForeignKey("EventoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ProAgil.Domain.Palestrante", "Palestrante")
-                        .WithMany("PalestranteEventos")
+                        .WithMany("PalestrantesEventos")
                         .HasForeignKey("PalestranteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -444,7 +444,7 @@ namespace ProAgil.Repository.Migrations
                 {
                     b.Navigation("Lotes");
 
-                    b.Navigation("PalestranteEventos");
+                    b.Navigation("PalestrantesEventos");
 
                     b.Navigation("RedesSociais");
                 });
@@ -461,7 +461,7 @@ namespace ProAgil.Repository.Migrations
 
             modelBuilder.Entity("ProAgil.Domain.Palestrante", b =>
                 {
-                    b.Navigation("PalestranteEventos");
+                    b.Navigation("PalestrantesEventos");
 
                     b.Navigation("RedesSociais");
                 });

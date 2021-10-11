@@ -10,7 +10,7 @@
       <div class="row g-3">
         <div class="col-12">
           <label for="firstName" class="form-label">Tema</label>
-          <input type="text" class="form-control" [class.is-invalid]="_f.tema.errors && _f.tema.touched" placeholder=""
+          <input type="text" class="form-control is-invalid" [class.is-invalid]="_f.tema.errors && _f.tema.touched" placeholder=""
             value="" formControlName="tema">
           <div class="invalid-feedback">
             Um Tema valido é requirido.
@@ -73,7 +73,8 @@
         </div>
         <div class="col-md-4">
           <label for="address2" class="form-label">Telefone </label>
-          <input type="text" class="form-control" [class.is-invalid]="_f.telefone.errors && _f.telefone.touched"
+          <input type="text" class="form-control" [mask]="'(00) 00000-0000'"
+          [class.is-invalid]="_f.telefone.errors && _f.telefone.touched"
             placeholder="" formControlName="telefone">
           <div class="invalid-feedback">
             Um telefone valido é requerido

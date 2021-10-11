@@ -193,4 +193,7 @@ export class EventosComponent implements OnInit {
   }
 
 
+  trackById(index: number, item: any) {
+    return item.id;
+  }
 }

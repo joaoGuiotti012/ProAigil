@@ -31,63 +31,83 @@ namespace ProAgil.Repository
         {
             _context.Remove(entity);
         }
+             
+
+        public async void Save(Evento evento)
+        {
+            var eventoExistente = await this.GetEventosAsyncById(evento.Id);
+            if (eventoExistente != null)
+            {
+                _context.Entry(eventoExistente).CurrentValues.SetValues(evento);
+            }
+            else
+            {
+                _context.Update(evento);
+            }
+            _context.SaveChanges();
+        }
 
         public async Task<bool> SaveChangesAsync()
         {
-            return (await _context.SaveChangesAsync() > 0);
+            return await _context.SaveChangesAsync() > 0;
         }
+
 
         //EVENTO
         public async Task<Evento[]> GetAllEventoAsync(bool includePalestrantes = false)
         {
             IQueryable<Evento> query = _context.Eventos
-                .Include(c => c.lotes)
-                .Include(c => c.redesSociais);
+                .Include(c => c.Lotes)
+                .Include(c => c.RedesSociais);
 
             if (includePalestrantes)
             {
                 query = query.
-                    Include(p => p.palestranteEventos).
-                    ThenInclude(p => p.palestrante);
+                    Include(p => p.PalestrantesEventos).
+                    ThenInclude(p => p.Palestrante);
             }
 
-            query = query.OrderByDescending(c => c.id);
+            query = query.OrderByDescending(c => c.Id);
 
             return await query.ToArrayAsync();
         }
         public async Task<Evento[]> GetAllEventoAsyncByTema(string tema, bool includePalestrantes)
         {
             IQueryable<Evento> query = _context.Eventos
-                .Include(c => c.lotes)
-                .Include(c => c.redesSociais);
+                .Include(c => c.Lotes)
+                .Include(c => c.RedesSociais);
 
             if (includePalestrantes)
             {
                 query = query.
-                    Include(p => p.palestranteEventos).
-                    ThenInclude(p => p.palestrante);
+                    Include(p => p.PalestrantesEventos).
+                    ThenInclude(p => p.Palestrante);
             }
 
-            query = query.OrderByDescending(c => c.dataEvento)
-                .Where(c => c.tema.ToLower().Contains(tema.ToLower()));
+            query = query
+                .AsNoTracking()
+                .OrderByDescending(c => c.DataEvento)
+                .Where(c => c.Tema.ToLower().Contains(tema.ToLower()));
 
             return await query.ToArrayAsync();
         }
-        public async Task<Evento> GetAllEventoAsyncById(int EventoId, bool includePalestrantes = false)
+        public async Task<Evento> GetEventosAsyncById(int EventoId, bool includePalestrantes = false)
         {
             IQueryable<Evento> query = _context.Eventos
-                .Include(c => c.lotes)
-                .Include(c => c.redesSociais);
+                .Include(c => c.Lotes)
+                .Include(c => c.RedesSociais);
 
             if (includePalestrantes)
             {
                 query = query.
-                    Include(p => p.palestranteEventos).
-                    ThenInclude(p => p.palestrante);
+                    Include(p => p.PalestrantesEventos).
+                    ThenInclude(p => p.Palestrante);
             }
 
-            query = query.OrderBy(c => c.dataEvento)
-                .Where(c => c.id == EventoId);
+            query = query
+                .AsNoTracking()
+                .OrderBy(c => c.Id)
+                .Where(c => c.Id == EventoId);
 
             return await query.FirstOrDefaultAsync();
         }
@@ -97,36 +117,44 @@ namespace ProAgil.Repository
         public async Task<Palestrante> GetPalestranteAsync(int PalestranteId, bool includeEventos = false)
         {
             IQueryable<Palestrante> query = _context.Palestrantes
-                .Include(c => c.redesSociais);
+                .Include(c => c.RedesSociais);
 
             if (includeEventos)
             {
                 query = query.
-                    Include(p => p.palestranteEventos).
-                    ThenInclude(p => p.evento);
+                    Include(p => p.PalestrantesEventos).
+                    ThenInclude(p => p.Evento);
             }
 
-            query = query.OrderBy(p => p.nome)
-                .Where(p => p.id == PalestranteId);
+            query = query.OrderBy(p => p.Nome)
+                .Where(p => p.Id == PalestranteId);
 
             return await query.FirstOrDefaultAsync();
         }
         public async Task<Palestrante[]> GetAllPalestrantesAsyncByName(string name, bool includeEventos = false)
         {
             IQueryable<Palestrante> query = _context.Palestrantes
-                .Include(c => c.redesSociais);
+                .Include(c => c.RedesSociais);
 
             if (includeEventos)
             {
                 query = query.
-                    Include(p => p.palestranteEventos).
-                    ThenInclude(p => p.evento);
+                    Include(p => p.PalestrantesEventos).
+                    ThenInclude(p => p.Evento);
             }
 
-            query = query.Where(p => p.nome.ToLower().Contains(name.ToLower()));
+            query = query.Where(p => p.Nome.ToLower().Contains(name.ToLower()));
 
             return await query.ToArrayAsync();
         }
+        public void DeleteRange<T>(T[] entity) where T : class
+        {
+            _context.RemoveRange(entity);
+        }
 
+        public void SaveChanges()
+        {
+            _context.SaveChanges();
+        }
     }
 }

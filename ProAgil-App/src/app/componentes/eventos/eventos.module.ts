@@ -13,6 +13,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { EventoResolve } from 'src/app/resolvers/evento.resolver';
 import { PopoverModule } from 'ngx-bootstrap/popover';
 import { DetalheComponent } from './detalhe/detalhe.component';
+import { InfraModule } from '../_infra/infra.module';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { NgxMaskModule } from 'ngx-mask';
+import { NgxCurrencyModule } from "ngx-currency";
 
 const routes: Routes = [
   {
@@ -37,12 +41,16 @@ const routes: Routes = [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
+    InfraModule,
+    TabsModule.forRoot(),
     RouterModule.forChild(routes),
     ModalModule.forRoot(),
     TooltipModule.forRoot(),
     BsDatepickerModule.forRoot(),
     PaginationModule.forRoot(),
     PopoverModule.forRoot(),
+    NgxMaskModule.forRoot(),
+    NgxCurrencyModule
   ],
   declarations: [
     EventosComponent,

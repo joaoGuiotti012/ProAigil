@@ -1,14 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastComponent } from './toast/toast.component';
+import { HeaderTitleComponent } from './header-title/header-title.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    BrowserAnimationsModule,
   ],
-  exports: [ToastComponent],
-  declarations: [ToastComponent]
+  exports: [ToastComponent, HeaderTitleComponent ],
+  declarations: [ToastComponent, HeaderTitleComponent ]
 })
 export class InfraModule { }
